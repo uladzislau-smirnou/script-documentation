@@ -120,9 +120,9 @@ Include the component script in your HTML:
 Place the web component anywhere in your application.
 
 ```
-<sk8-embed
+<pipelines-embed
   base-api="https://your-backend.example.com/api/sk8-embedded"
-</sk8-embed>
+</pipelines-embed>
 ```
 
 ### Framework-Specific Examples
@@ -132,7 +132,7 @@ Place the web component anywhere in your application.
 function MyComponent() {
   return (
     <div>
-      <sk8-embed
+      <pipelines-embed
         base-api="https://your-backend.example.com/api/sk8-embedded"
       />
     </div>
@@ -144,7 +144,7 @@ function MyComponent() {
 ```
 <template>
   <div>
-    <sk8-embed
+    <pipelines-embed
       :base-api="apiUrl"
     />
   </div>
@@ -164,7 +164,7 @@ export default {
 **Vanilla JavaScript:**
 ```
 // Dynamically add component
-const sk8Component = document.createElement('sk8-embed');
+const sk8Component = document.createElement('pipelines-embed');
 sk8Component.setAttribute('base-api', 'https://your-backend.example.com/api/sk8-embedded');
 document.getElementById('container').appendChild(sk8Component);
 ```
@@ -177,6 +177,6 @@ document.getElementById('container').appendChild(sk8Component);
 
 | Attribute | Required | Type | Default | Description |
 |-----------|----------|------|---------|-------------|
-| `base-api` | **Yes** | string | - | Your backend endpoint with SK8 middleware |
+| `base-api` | **Yes** | string | - | Full path to your backend endpoint with SK8 middleware |
 
 ---
