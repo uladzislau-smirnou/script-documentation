@@ -35,8 +35,7 @@ Install the SK8 npm package on your backend server:
 ### Create the Middleware Endpoint
 
 The SDK provides a middleware function that proxies requests from your embedded components to the SK8 API.
-This SDK tries to be as much framework-agnostic as possible by using standard Node APIs (`res.statusCode`, `res.setHeader`, `res.end`), but favours Express
-syntax because it is the most popular framework.
+This SDK tries to be as much framework-agnostic as possible by using standard Node APIs (`res.statusCode`, `res.setHeader`, `res.end`) and can run in any Node-based framework. Examples use Express because it is the most common setup.
 
 ```
 // Example: Express.js implementation
@@ -61,15 +60,13 @@ app.use(errorHandler)
 **Note:** The middleware automatically:
 - Forwards requests to the SK8 API
 - Attaches your API key for authentication
-- Handles request/response formatting
 
 If you don't use Express then make sure that these properties are set for `req` and `res`:
 
 **`req` properties:**
 - **url** – request path including query parameters
 - **method** – request method (GET, POST, etc.)
-- **headers** – request headers; Middleware will construct a new 
-`headers` object and will only read `Content-Type` header from the request. The middleware falls back to `headers: {Content-Type: applicaton/json, 'x-api-key': <your-api-key>}` if omitted.
+- **headers** – request headers; The middleware does not forward incoming headers except `Content-Type`. Authentication is handled via your SK8 API key.
 - **body** – request body should be already parsed as JSON (e.g. via `express.json()` or another body parser); required for methods that send a body (POST, PUT, PATCH, etc.)
 
 **`res` properties** (standard Node `ServerResponse`):
