@@ -120,7 +120,7 @@ Place the web component anywhere in your application.
 ```
 <pipelines-embed
   base-api="https://your-backend.example.com/api/sk8-embedded"
-</pipelines-embed>
+/>
 ```
 
 ### Framework-Specific Examples
