@@ -20,8 +20,6 @@ Before beginning, ensure you have:
 
 ### 🔐 Security Notes
 - **Never expose this token in client-side code** (browser, mobile apps, etc.)
-- Each token is unique per client and environment
-- Tokens do not expire, but generating a new key invalidates previous ones
 - Store the token in environment variables or a secure secrets manager
 
 ---
