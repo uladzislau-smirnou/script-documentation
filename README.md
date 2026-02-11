@@ -39,13 +39,14 @@ This SDK tries to be as much framework-agnostic as possible by using standard No
 // Example: Express.js implementation
 const express = require('express');
 
-import { initializeSK8Middleware } from "../sk8-middleware/index.mjs";
+import { initializeSK8Middleware } from 'npm-middleware-repo';
 
 const app = express();
 
 // Initialize the middleware with your API key
 const sk8Middleware = initializeSK8Middleware({
   apiKey: process.env.SK8_API_KEY,
+  baseUrl: "https://app-dev.sk8.ai/api"
 });
 
 // Create an endpoint for SK8 components to communicate through
@@ -54,6 +55,9 @@ app.use(express.json())
 app.post('/api/sk8-embedded', sk8Middleware);
 app.use(errorHandler)
 ```
+
+**Important:**
+- `baseUrl` should point to `https://app-dev.sk8.ai/api`
 
 **Note:** The middleware automatically:
 - Forwards requests to the SK8 API
