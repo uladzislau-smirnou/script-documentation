@@ -35,6 +35,12 @@ Install the SK8 npm package on your backend server:
 The SDK provides a middleware function that proxies requests from your embedded components to the SK8 API.
 This SDK tries to be as much framework-agnostic as possible by using standard Node APIs (`res.statusCode`, `res.setHeader`, `res.end`) and can run in any Node-based framework. Examples use Express because it is the most common setup.
 
+Add an additional middleware before the SK8 middleware that gets
+the requesting client identifier. Cliend identifier can be anything
+you use in order to uniquely identify the users in you application,
+but it must be the same client identifier that you provided during SK8 tenant creation.
+This middleware must set 'clientId' attribute on the request object.
+
 ```
 // Example: Express.js implementation
 const express = require('express');
@@ -42,6 +48,11 @@ const express = require('express');
 import { initializeSK8Middleware } from 'npm-middleware-repo';
 
 const app = express();
+
+app.use(req => {
+  req.clientId = <your-cliend-id-provider>;
+  next();
+});
 
 // Initialize the middleware with your API key
 const sk8Middleware = initializeSK8Middleware({
