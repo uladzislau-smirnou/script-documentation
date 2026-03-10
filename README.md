@@ -5,7 +5,6 @@ This guide explains how to embed SK8 components into your application, both on t
 ## Prerequisites
 
 Before beginning, ensure you have:
-- Access to the SK8 admin panel
 - A backend server (Node.js)
 - Ability to serve static files from your backend
 
@@ -13,10 +12,7 @@ Before beginning, ensure you have:
 
 ## Step 1: Obtain Your Access Token
 
-1. Log in to the [SK8 Admin Panel](https://admin.sk8.example.com)
-2. Navigate to **Settings** → **API Keys**
-3. Click "Generate New API Key" for your desired environment (development/production)
-4. Copy the generated key and store it securely
+1. Ask SK8 support to provide an API key
 
 ### 🔐 Security Notes
 - **Never expose this token in client-side code** (browser, mobile apps, etc.)
@@ -37,9 +33,9 @@ This SDK tries to be as much framework-agnostic as possible by using standard No
 
 Add an additional middleware before the SK8 middleware that gets
 the requesting client identifier. Cliend identifier can be anything
-you use in order to uniquely identify the users in you application,
+you use in order to uniquely identify users in you application,
 but it must be the same client identifier that you provided during SK8 tenant creation.
-This middleware must set 'clientId' attribute on the request object.
+This middleware must set `clientId` attribute on the request object.
 
 ```
 // Example: Express.js implementation
@@ -60,11 +56,11 @@ const sk8Middleware = initializeSK8Middleware({
   baseUrl: "https://app-dev.sk8.ai/api"
 });
 
-// Create an endpoint for SK8 components to communicate through
-// Order: body parser (mandatory) → SK8 middleware → error handler (optional)
 app.use(express.json()) 
 app.post('/api/sk8-embedded', sk8Middleware);
 app.use(errorHandler)
+
+// Full order (preferred): body parser (mandatory) → cliendId extractor middleware (mandatory) → SK8 middleware → error handler (optional)
 ```
 
 **Important:**
@@ -98,15 +94,15 @@ If 'next' is not a function then on SK8 API error response a generic
 
 Download the latest component build and serve it from your backend:
 
-1. **Download** the component script:
-   ```https://github.com/uladzislau-smirnou/script-documentation/blob/master/pipelines-embed.js```
+1. **Download** the component scripts:
+   ```https://github.com/uladzislau-smirnou/script-documentation```
 
-2. **Save** it to the directory of your choise:
+2. **Save** to the directory of your choise, for example:
    ```
    # Example directory structure
    public/
    ├── embed/
-   │   └── pipelines-embed.js  # Renamed for clarity
+   │   └── pipelines-embed.js
    └── index.html
    ```
 
@@ -184,7 +180,7 @@ document.getElementById('container').appendChild(sk8Component);
 
 ---
 
-## Step 5: Configuration Options
+## Configuration Options
 
 ### Component Attributes
 
